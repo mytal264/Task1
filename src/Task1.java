@@ -111,18 +111,19 @@ public class Task1 {
         return digits;
     }
     public static void palindromic(){
-        int num,digits;
+        int num,digitsOfNum,originalNum,reverseNum=0;
         do {
             System.out.println("Enter a five digits and positive number");
-            num = scanner.nextInt();
-            digits=countDigits(num);
-            if (digits!=5 || num<0) System.out.println("Error! You did not follow the instructions.");
-        }while (digits!=5 || num<0);
-        int unity = num%10;
-        int dozens = num/10%10;
-        int thousands = num/1000%10;
-        int tenThousands = num/10000;
-        if (unity==tenThousands && dozens==thousands) System.out.println("The number is palindromic");
+            num = originalNum = scanner.nextInt();
+            digitsOfNum=countDigits(num);
+            if (digitsOfNum!=5 || num<0) System.out.println("Error! You did not follow the instructions.");
+        }while (digitsOfNum!=5 || num<0);
+        do {
+            int digit=num%10;
+            reverseNum=reverseNum*10+digit;
+            num=num/10;
+        }while (num!=0);
+        if (originalNum==reverseNum) System.out.println("The number is palindromic");
         else System.out.println("The number is not palindromic");
     }
     public static void primeNumberRange() {

@@ -6,30 +6,18 @@ public class Task1 {
         int option = menu();
         while (option!=0){
             switch (option) {
-                case 1: { circle();
-                    break; }
-                case 2: { temperature();
-                    break; }
-                case 3: { factorial();
-                    break; }
-                case 4: { sumNumberRange();
-                    break; }
-                case 5: { checkIfPrimeNumber();
-                    break; }
-                case 6: { palindromic();
-                    break; }
-                case 7: { primeNumberRange();
-                    break; }
-                case 8: { gcd();
-                    break; }
-                case 9: { quadraticEquation();
-                    break; }
-                case 10: { compoundInterest();
-                    break; }
-                case 11: { ifFibonacci();
-                    break; }
-                case 12: { narcissisticNumber();
-                    break; }
+                case 1 -> circle();
+                case 2 -> temperature();
+                case 3 -> factorial();
+                case 4 -> sumNumberRange();
+                case 5 -> checkIfPrimeNumber();
+                case 6 -> palindromic();
+                case 7 -> primeNumberRange();
+                case 8 -> gcd();
+                case 9 -> quadraticEquation();
+                case 10 -> compoundInterest();
+                case 11 -> ifFibonacci();
+                case 12 -> narcissisticNumber();
             }
             option=menu();
         }
@@ -76,8 +64,9 @@ public class Task1 {
     public static void factorial(){
         int num , factorial=1;
         do{
-            System.out.println("Enter a number");
+            System.out.println("Enter a positive number");
             num = scanner.nextInt();
+            if (num<0) System.out.println("Error! You did not follow the instructions.");
         } while (num<0);
         for (int i=1;i<=num;i++){
             factorial = factorial*i;
@@ -91,7 +80,7 @@ public class Task1 {
             num1 = scanner.nextInt();
             System.out.println("Enter final number");
             num2 = sum = scanner.nextInt();
-            if (num1==num2) System.out.println("Error! You entered two equal numbers.");
+            if (num1==num2) System.out.println("Error! You must enter two different numbers.");
         }while (num1==num2);
         do {
             sum = sum+num1;
@@ -122,18 +111,19 @@ public class Task1 {
         return digits;
     }
     public static void palindromic(){
-        int num;
+        int num,digits;
         do {
-            System.out.println("Enter a five digits number");
+            System.out.println("Enter a five digits and positive number");
             num = scanner.nextInt();
-        }while (countDigits(num)!=5 || num<0);
+            digits=countDigits(num);
+            if (digits!=5 || num<0) System.out.println("Error! You did not follow the instructions.");
+        }while (digits!=5 || num<0);
         int unity = num%10;
         int dozens = num/10%10;
         int thousands = num/1000%10;
         int tenThousands = num/10000;
-        if (unity==tenThousands && dozens==thousands) {
-            System.out.println("The number is palindromic");
-        } else System.out.println("The number is not palindromic");
+        if (unity==tenThousands && dozens==thousands) System.out.println("The number is palindromic");
+        else System.out.println("The number is not palindromic");
     }
     public static void primeNumberRange() {
         System.out.println("Enter first number");
@@ -217,6 +207,18 @@ public class Task1 {
         if (aN==num) System.out.println("The number is in fibonacci sequence");
         else System.out.println("The number isn't in fibonacci sequence");
     }
+    public static boolean ifNarcissistic(int num){
+        int sum=0 , sumSquare=1 , checkNum=num , digits=countDigits(num);
+        do{
+            for (int i=0;i<digits;i++){
+                sumSquare = sumSquare*(checkNum%10);
+            }
+            sum = sum + sumSquare;
+            sumSquare = 1;
+            checkNum = checkNum/10;
+        }while (checkNum!=0);
+        return sum==num;
+    }
     public static void narcissisticNumber(){
         System.out.println("Enter a number");
         int num = scanner.nextInt();
@@ -229,17 +231,5 @@ public class Task1 {
             if (numBelow==num) System.out.println("The number you entered is narcissistic number");
             else System.out.println("The nearest narcissistic number is "+numBelow);
         } else System.out.println("The nearest narcissistic number is "+numAbove);
-    }
-    public static boolean ifNarcissistic(int num){
-        int sum=0 , sumSquare=1 , checkNum=num , digits=countDigits(num);
-        do{
-            for (int i=0;i<digits;i++){
-                sumSquare = sumSquare*(checkNum%10);
-            }
-            sum = sum + sumSquare;
-            sumSquare = 1;
-            checkNum = checkNum/10;
-        }while (checkNum!=0);
-        return sum==num;
     }
 }
